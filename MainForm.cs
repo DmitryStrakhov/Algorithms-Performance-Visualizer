@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Algorithms_Performance_Visualizer {
-    public partial class Form1 : Form {
-        public Form1() {
+    public partial class MainForm : Form {
+        public MainForm() {
             InitializeComponent();
         }
     }
