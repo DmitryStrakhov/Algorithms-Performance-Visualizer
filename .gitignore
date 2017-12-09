@@ -1,0 +1,4 @@
+*.suo
+*.bak
+bin/
+obj/
