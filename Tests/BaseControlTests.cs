@@ -33,33 +33,15 @@ namespace Algorithms_Performance_Visualizer.Tests {
     class TestPainter : BasePainter {
         public TestPainter() {
         }
-        public override void Paint(DrawArgs drawArgs) {
-            TestViewInfo viewInfo = (TestViewInfo)drawArgs.ViewInfo;
-            drawArgs.Cache.DrawRectangle(Pens.Black, viewInfo.Bounds);
-        }
+        protected override void DrawContent(DrawArgs drawArgs) { }
     }
 
     #endregion
 
     #region TestForm
 
-    class TestForm : Form {
-        TestControl control;
-
-        public TestForm() {
-            Size = new Size(350, 200);
-            this.control = CreateTestControl();
-            InitializeTestControl(this.control);
-            Controls.Add(this.control);
-        }
-        static TestControl CreateTestControl() {
-            return new TestControl();
-        }
-        static void InitializeTestControl(TestControl control) {
-            control.Location = new Point(10, 10);
-            control.Size = new Size(250, 100);
-        }
-        public TestControl Control { get { return control; } }
+    class TestBaseControlForm : BaseTestForm<TestControl> {
+        public TestBaseControlForm() { }
     }
 
     #endregion
@@ -67,14 +49,16 @@ namespace Algorithms_Performance_Visualizer.Tests {
 
     [TestClass]
     public class BaseControlTests {
-        TestForm form;
+        TestBaseControlForm form;
         TestControl control;
 
         [TestInitialize]
         public void SetUp() {
-            this.form = new TestForm();
+            this.form = new TestBaseControlForm();
             this.control = this.form.Control;
             this.form.Show();
+            this.form.Visible = true;
+            this.form.Update();
         }
         [TestCleanup]
         public void TearDown() {
@@ -82,15 +66,14 @@ namespace Algorithms_Performance_Visualizer.Tests {
             this.form = null;
             this.control = null;
         }
-        /*
-        [TestMethod]
+        TestControl Control { get { return control; } }
+
+        [TestMethod, Ignore]
         public void ShowUpTest() {
-            this.form.WindowState = FormWindowState.Normal;
             while(form.Visible) {
                 Application.DoEvents();
             }
         }
-        */
         [TestMethod]
         public void DefaultsTest() {
             Assert.AreSame(typeof(TestPainter), Control.Painter.GetType());
@@ -105,9 +88,6 @@ namespace Algorithms_Performance_Visualizer.Tests {
             Control.Size = new Size(100, 80);
             Assert.AreEqual(new Rectangle(0, 0, 100, 80), Control.ViewInfo.Bounds);
         }
-
-        Form Form { get { return form; } }
-        TestControl Control { get { return control; } }
     }
 }
 #endif

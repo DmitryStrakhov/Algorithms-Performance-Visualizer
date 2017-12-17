@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +12,40 @@ namespace Algorithms_Performance_Visualizer.Base {
         readonly BaseViewInfo viewInfo;
 
         public BaseControl() {
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
             this.painter = CreatePainter();
             this.viewInfo = CreateViewInfo();
         }
 
-        protected override void OnPaint(PaintEventArgs e) {
+        protected sealed override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
-            using(PaintCache cache = new PaintCache(e.Graphics)) {
+            PaintCache cache = new PaintCache(e.Graphics);
+            try {
+                ViewInfo.SetGraphics(e.Graphics);
                 ViewInfo.CalcViewInfo();
                 Painter.Paint(new DrawArgs(cache, ViewInfo));
             }
+            finally {
+                cache.Dispose();
+                ViewInfo.ReleaseGraphics();
+            }
+        }
+        protected void UpdateViewInfo() {
+            if(!IsHandleCreated)
+                return;
+            Graphics graphics = Graphics.FromHwnd(Handle);
+            try {
+                ViewInfo.SetGraphics(graphics);
+                ViewInfo.CalcViewInfo();
+            }
+            finally {
+                ViewInfo.ReleaseGraphics();
+                graphics.Dispose();
+            }
+        }
+
+        protected void LayoutChanged() {
+            Invalidate();
         }
 
         public BasePainter Painter { get { return painter; } }

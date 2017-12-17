@@ -47,6 +47,7 @@
     <Reference Condition="'$(Configuration)'=='Debug'" Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseCollection.cs" />
     <Compile Include="Base\Control.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -54,6 +55,12 @@
     <Compile Include="Base\PaintCache.cs" />
     <Compile Include="Base\Painter.cs" />
     <Compile Include="Base\ViewInfo.cs" />
+    <Compile Include="Chart\Chart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Chart\Painter.cs" />
+    <Compile Include="Chart\ViewInfo.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +70,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BaseControlTests.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tests\BaseTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tests\ChartControlTests.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
