@@ -1,1 +1,1 @@
-The project was developed to visualize the performance of some algorithms using graphs to check their grow rates and compare to each other.
+The project is mostly the simple chart control implementation. The chart supports, for example, multiple series, legend, view customization etc. I'm using it to analyze performance of some algorithms (i.e. check their grow rates) and compare them to each other. But it could be used to any similar purpose of course.
