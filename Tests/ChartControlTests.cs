@@ -15,6 +15,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Algorithms_Performance_Visualizer.Tests {
     #region TestChartControl
 
+    [ToolboxItem(false)]
     class TestChartControl : ChartControl {
         public TestChartControl() {
         }
@@ -125,15 +126,15 @@ namespace Algorithms_Performance_Visualizer.Tests {
         public void SeriesBoundsTest() {
             ChartSeries series = new ChartSeries();
             Assert.IsTrue(series.Bounds.IsNaN());
-            series.Add(new ChartPoint(-100, 100));
+            series.PointList.Add(new ChartPoint(-100, 100));
             Assert.AreEqual(new ChartSeriesBounds(-100, -100, 100, 100), series.Bounds);
-            series.Add(new ChartPoint(-200, 300));
+            series.PointList.Add(new ChartPoint(-200, 300));
             Assert.AreEqual(new ChartSeriesBounds(-200, -100, 300, 100), series.Bounds);
-            series.Add(new ChartPoint(0, 40));
+            series.PointList.Add(new ChartPoint(0, 40));
             Assert.AreEqual(new ChartSeriesBounds(-200, 0, 300, 40), series.Bounds);
-            series.RemoveAt(1);
+            series.PointList.RemoveAt(1);
             Assert.AreEqual(new ChartSeriesBounds(-100, 0, 100, 40), series.Bounds);
-            series.Clear();
+            series.PointList.Clear();
             Assert.IsTrue(series.Bounds.IsNaN());
         }
         [TestMethod]
@@ -296,13 +297,34 @@ namespace Algorithms_Performance_Visualizer.Tests {
                 Assert.IsTrue(pointArea.Contains(polSeries[i].Point));
             }
         }
+        [TestMethod]
+        public void ChartSeriesCollectionChangedEventTest() {
+            string trace = string.Empty;
+            Control.Series.CollectionChanged += (s, e) => trace += "->Changed;";
+            ChartSeries series = new ChartSeries();
+            Control.Series.Add(series);
+            Assert.AreEqual("->Changed;", trace);
+            trace = string.Empty;
+            series.Color = Color.Magenta;
+            Assert.AreEqual("->Changed;", trace);
+            trace = string.Empty;
+            series.Label = "_label_";
+            Assert.AreEqual("->Changed;", trace);
+            trace = string.Empty;
+            series.PointList.Add(new ChartPoint(1, 1));
+            series.PointList.Add(new ChartPoint(2, 2));
+            Assert.AreEqual("->Changed;->Changed;", trace);
+            trace = string.Empty;
+            Control.Series.Clear();
+            Assert.AreEqual("->Changed;", trace);
+        }
 
         static void FillSimpleChartControl(TestChartControl chartControl, params ChartPoint[] chartPoints) {
             ChartSeries series = new ChartSeries();
             series.Color = Color.Red;
             series.Label = "Simple Series";
             for(int i = 0; i < chartPoints.Length; i++) {
-                series.Add(chartPoints[i]);
+                series.PointList.Add(chartPoints[i]);
             }
             chartControl.Series.Add(series);
             chartControl.UpdateViewInfo();
@@ -312,13 +334,13 @@ namespace Algorithms_Performance_Visualizer.Tests {
             logSeries.Color = Color.Red;
             logSeries.Label = "Logarithm";
             for(int i = 1; i <= 100; i++) {
-                logSeries.Add(new ChartPoint(i, Math.Log(i)));
+                logSeries.PointList.Add(new ChartPoint(i, Math.Log(i)));
             }
             ChartSeries polSeries = new ChartSeries();
             polSeries.Label = "Polynomial";
             polSeries.Color = Color.Blue;
             for(int i = 1; i <= 100; i++) {
-                polSeries.Add(new ChartPoint(i, i * i));
+                polSeries.PointList.Add(new ChartPoint(i, i * i));
             }
             chartControl.Series.Add(logSeries);
             chartControl.Series.Add(polSeries);

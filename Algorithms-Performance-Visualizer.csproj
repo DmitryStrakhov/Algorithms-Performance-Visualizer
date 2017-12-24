@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Data-Structures-and-Algorithms">
+      <HintPath>..\Data-Structures-and-Algorithms\bin\Debug\Data-Structures-and-Algorithms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +51,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseCollection.cs" />
+    <Compile Include="Base\BaseController.cs" />
+    <Compile Include="Base\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\BaseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Base\Control.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -60,6 +70,7 @@
     </Compile>
     <Compile Include="Chart\Painter.cs" />
     <Compile Include="Chart\ViewInfo.cs" />
+    <Compile Include="Components\Sorters.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -69,6 +80,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ISorter.cs" />
     <Compile Include="Tests\BaseControlTests.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -77,6 +89,15 @@
     </Compile>
     <Compile Include="Tests\ChartControlTests.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tests\SortingViewTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\SortingView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\SortingView.Designer.cs">
+      <DependentUpon>SortingView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -90,6 +111,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\SortingView.resx">
+      <DependentUpon>SortingView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -106,8 +130,9 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

@@ -34,6 +34,9 @@ namespace Algorithms_Performance_Visualizer.Base {
         public void DrawPoint(Pen pen, Point point, Size sz) {
             graphics.DrawEllipse(pen, point.CreateRect(sz));
         }
+        public void FillPoint(Brush brush, Point point, Size sz) {
+            graphics.FillEllipse(brush, point.CreateRect(sz));
+        }
         public void DrawText(string text, Font font, Brush brush, Rectangle rect, StringFormat format) {
             graphics.DrawString(text, font, brush, rect, format);
         }

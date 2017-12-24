@@ -10,26 +10,53 @@ namespace Algorithms_Performance_Visualizer.Base {
         public BaseCollection() {
         }
 
-        protected override void InsertItem(int index, T item) {
+        protected sealed override void InsertItem(int index, T item) {
             base.InsertItem(index, item);
-            RaiseListChanged(EventArgs.Empty);
+            OnItemAdded(item);
+            RaiseListChanged(new CollectionChangedEventArgs(CollectionChangeType.Insert, index));
         }
-        protected override void SetItem(int index, T item) {
+        protected sealed override void SetItem(int index, T item) {
             base.SetItem(index, item);
-            RaiseListChanged(EventArgs.Empty);
+            RaiseListChanged(new CollectionChangedEventArgs(CollectionChangeType.SetItem));
         }
-        protected override void RemoveItem(int index) {
+        protected sealed override void RemoveItem(int index) {
+            T item = this[index];
             base.RemoveItem(index);
-            RaiseListChanged(EventArgs.Empty);
+            OnItemRemoved(item);
+            RaiseListChanged(new CollectionChangedEventArgs(CollectionChangeType.Remove));
         }
-        protected override void ClearItems() {
+        protected sealed override void ClearItems() {
+            this.ForEach(x => OnItemRemoved(x));
             base.ClearItems();
-            RaiseListChanged(EventArgs.Empty);
+            RaiseListChanged(new CollectionChangedEventArgs(CollectionChangeType.Clear));
         }
+        protected virtual void OnItemAdded(T item) { }
+        protected virtual void OnItemRemoved(T item) { }
 
-        void RaiseListChanged(EventArgs e) {
-            if(ListChanged != null) ListChanged(this, EventArgs.Empty);
+        protected void RaiseListChanged(CollectionChangedEventArgs e) {
+            if(CollectionChanged != null) CollectionChanged(this, e);
         }
-        public event EventHandler ListChanged;
+        public event CollectionChangedEventHandler CollectionChanged;
+    }
+
+    public delegate void CollectionChangedEventHandler(object sender, CollectionChangedEventArgs e);
+
+    public enum CollectionChangeType {
+        Insert, SetItem, Remove, Clear, ItemChanged
+    }
+
+    public class CollectionChangedEventArgs : EventArgs {
+        readonly CollectionChangeType changeType;
+        readonly int index;
+
+        public CollectionChangedEventArgs(CollectionChangeType changeType)
+            : this(changeType, -1) {
+        }
+        public CollectionChangedEventArgs(CollectionChangeType changeType, int index) {
+            this.changeType = changeType;
+            this.index = index;
+        }
+        public int Index { get { return index; } }
+        public CollectionChangeType ChangeType { get { return changeType; } }
     }
 }

@@ -81,7 +81,7 @@ namespace Algorithms_Performance_Visualizer.Controls {
         }
         SeriesViewInfo CreateSeries(ChartSeries series) {
             SeriesViewInfo seriesViewInfo = new SeriesViewInfo(series.Color);
-            foreach(ChartPoint chartPoint in series) {
+            foreach(ChartPoint chartPoint in series.PointList) {
                 Point plysicalPoint = CalcPhysicalPoint(chartPoint);
                 seriesViewInfo.Add(new SeriesItemViewInfo(plysicalPoint));
             }

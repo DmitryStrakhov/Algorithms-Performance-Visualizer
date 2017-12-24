@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +36,7 @@ namespace Algorithms_Performance_Visualizer.Controls {
             this.legendContentPadding = DefaultLegendContentPadding;
             this.gridDensity = ChartGridDensity.Normal;
             this.series = new ChartSeriesCollection();
-            this.series.ListChanged += OnSeriesListChanged;
+            this.series.CollectionChanged += OnSeriesListChanged;
         }
         [DefaultValue(25), ChartLayoutCategory]
         public int OriginOffset {
@@ -138,11 +140,16 @@ namespace Algorithms_Performance_Visualizer.Controls {
                 LayoutChanged();
             }
         }
-        [ChartDataCategory]
+
+        [ChartDataCategory, DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ChartSeriesCollection Series { get { return series; } }
 
         void OnSeriesListChanged(object sender, EventArgs e) {
             Invalidate();
+        }
+
+        protected override Size DefaultSize {
+            get { return new Size(250, 150); }
         }
 
         protected override BasePainter CreatePainter() {
@@ -186,44 +193,80 @@ namespace Algorithms_Performance_Visualizer.Controls {
         public double Y { get { return y; } }
     }
 
-    public class ChartSeries : Collection<ChartPoint> {
+    public class ChartSeries : Component {
         string label;
         Color color;
         ChartSeriesBounds bounds;
+        ChartPointCollection pointList;
 
         public ChartSeries() {
             this.label = string.Empty;
             this.color = Color.Empty;
             this.bounds = new ChartSeriesBounds();
+            this.pointList = new ChartPointCollection();
+            this.pointList.CollectionChanged += OnPointListChanged;
         }
         public string Label {
             get { return label; }
-            set { label = value; }
+            set {
+                if(Label == value)
+                    return;
+                label = value;
+                RaiseChanged(EventArgs.Empty);
+            }
         }
+        bool ShouldSerializeLabel() {
+            if(string.IsNullOrEmpty(Label)) return false;
+            return true;
+        }
+        void ResetLabel() {
+            Label = string.Empty;
+        }
+        public ChartPointCollection PointList { get { return pointList; } }
+
         public Color Color {
             get { return color; }
-            set { color = value; }
+            set {
+                if(Color == value)
+                    return;
+                color = value;
+                RaiseChanged(EventArgs.Empty);
+            }
+        }
+        bool ShouldSerializeColor() {
+            return Color != Color.Empty;
+        }
+        void ResetColor() {
+            Color = Color.Empty;
+        }
+        
+        public event EventHandler Changed;
+
+        void RaiseChanged(EventArgs e) {
+            if(Changed != null) Changed(this, e);
         }
 
-        protected override void InsertItem(int index, ChartPoint item) {
-            base.InsertItem(index, item);
-            Bounds.CheckBounds(item);
-        }
-        protected override void SetItem(int index, ChartPoint item) {
-            base.SetItem(index, item);
-            Bounds.Clear();
-            Items.ForEach(x => Bounds.CheckBounds(x));
-        }
-        protected override void RemoveItem(int index) {
-            base.RemoveItem(index);
-            Bounds.Clear();
-            Items.ForEach(x => Bounds.CheckBounds(x));
-        }
-        protected override void ClearItems() {
-            base.ClearItems();
-            Bounds.Clear();
+        void OnPointListChanged(object sender, CollectionChangedEventArgs e) {
+            switch(e.ChangeType) {
+                case CollectionChangeType.Insert:
+                    Bounds.CheckBounds(PointList[e.Index]);
+                    break;
+                case CollectionChangeType.SetItem:
+                case CollectionChangeType.Remove:
+                    Bounds.Clear();
+                    PointList.ForEach(x => Bounds.CheckBounds(x));
+                    break;
+                case CollectionChangeType.Clear:
+                    Bounds.Clear();
+                    break;
+            }
+            RaiseChanged(EventArgs.Empty);
         }
         internal ChartSeriesBounds Bounds { get { return bounds; } }
+    }
+
+    public class ChartPointCollection : BaseCollection<ChartPoint> {
+        public ChartPointCollection() { }
     }
 
     [DebuggerDisplay("ChartSeriesBounds(Left={Left},Right={Right},Top={Top},Bottom={Bottom})")]
@@ -308,6 +351,15 @@ namespace Algorithms_Performance_Visualizer.Controls {
 
     public class ChartSeriesCollection : BaseCollection<ChartSeries> {
         public ChartSeriesCollection() {
+        }
+        protected override void OnItemAdded(ChartSeries item) {
+            item.Changed += OnItemChanged;
+        }
+        protected override void OnItemRemoved(ChartSeries item) {
+            item.Changed -= OnItemChanged;
+        }
+        void OnItemChanged(object sender, EventArgs e) {
+            RaiseListChanged(new CollectionChangedEventArgs(CollectionChangeType.ItemChanged));
         }
     }
 }

@@ -21,10 +21,8 @@ namespace Algorithms_Performance_Visualizer.Controls {
         }
         void DrawSeries(DrawArgs drawArgs, SeriesViewInfo series) {
             ChartControlViewInfo viewInfo = (ChartControlViewInfo)drawArgs.ViewInfo;
-            using(Pen pointPen = new Pen(series.Color)) {
-                foreach(SeriesItemViewInfo seriesItem in series) {
-                    drawArgs.Cache.DrawPoint(pointPen, seriesItem.Point, viewInfo.PointSize);
-                }
+            foreach(SeriesItemViewInfo seriesItem in series) {
+                drawArgs.Cache.FillPoint(drawArgs.Cache.GetSolidBrush(series.Color), seriesItem.Point, viewInfo.PointSize);
             }
         }
         void DrawLegend(DrawArgs drawArgs) {

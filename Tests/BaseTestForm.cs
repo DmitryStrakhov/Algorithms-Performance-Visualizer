@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Algorithms_Performance_Visualizer.Base;
 
 namespace Algorithms_Performance_Visualizer.Tests {
-    public class BaseTestForm<TControl> : Form where TControl : BaseControl, new() {
+    public class BaseTestForm<TControl> : Form where TControl : Control, new() {
         TControl control;
         public BaseTestForm() {
             InitializeForm();

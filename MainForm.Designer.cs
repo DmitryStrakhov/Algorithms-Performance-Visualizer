@@ -23,48 +23,62 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabSorting = new System.Windows.Forms.TabPage();
+            this.sortingView1 = new Algorithms_Performance_Visualizer.Views.SortingView();
+            this.tabControl.SuspendLayout();
+            this.tabSorting.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(839, 485);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl.Controls.Add(this.tabSorting);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1210, 607);
+            this.tabControl.TabIndex = 0;
             // 
-            // tabPage1
+            // tabSorting
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(831, 459);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabSorting.Controls.Add(this.sortingView1);
+            this.tabSorting.Location = new System.Drawing.Point(4, 22);
+            this.tabSorting.Name = "tabSorting";
+            this.tabSorting.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSorting.Size = new System.Drawing.Size(1202, 581);
+            this.tabSorting.TabIndex = 0;
+            this.tabSorting.Text = "Sorting";
+            this.tabSorting.UseVisualStyleBackColor = true;
+            // 
+            // sortingView1
+            // 
+            this.sortingView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sortingView1.Location = new System.Drawing.Point(3, 3);
+            this.sortingView1.Name = "sortingView1";
+            this.sortingView1.Size = new System.Drawing.Size(1196, 575);
+            this.sortingView1.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(839, 485);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(1210, 607);
+            this.Controls.Add(this.tabControl);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Algorithms Performance Visualizer";
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
+            this.tabSorting.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabSorting;
+        private Views.SortingView sortingView1;
     }
 }
 

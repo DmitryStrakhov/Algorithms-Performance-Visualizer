@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Algorithms_Performance_Visualizer.Tests {
     #region TestControl
 
+    [ToolboxItem(false)]
     class TestControl : BaseControl {
         public TestControl() {
         }
