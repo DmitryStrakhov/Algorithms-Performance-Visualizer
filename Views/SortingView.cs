@@ -96,10 +96,10 @@ namespace Algorithms_Performance_Visualizer.Views {
                 await Measure(this.seriesTreeSort, new TreeDataSorter(), data);
             }
             if(Controller.AllowCountingSort) {
-                await Measure(this.seriesCountingSort, new CountingDataSorter(0, 100000), data);
+                await Measure(this.seriesCountingSort, new CountingDataSorter(0, 10000), data);
             }
             if(Controller.AllowBucketSort) {
-                await Measure(this.seriesBucketSort, new BucketDataSorter(0, 100000), data);
+                await Measure(this.seriesBucketSort, new BucketDataSorter(0, 10000), data);
             }
             if(Controller.AllowRadixSort) {
                 await Measure(this.seriesRadixSort, new RadixDataSorter(), data);
@@ -121,7 +121,7 @@ namespace Algorithms_Performance_Visualizer.Views {
             SortDataItem[] data = new SortDataItem[dataSetSize];
             Random rg = new Random();
             for(int n = 0; n < data.Length; n++) {
-                data[n] = new SortDataItem(rg.Next(0, 100000));
+                data[n] = new SortDataItem(rg.Next(0, 10000));
             }
             return data;
         }

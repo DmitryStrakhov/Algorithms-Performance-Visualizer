@@ -66,7 +66,7 @@ namespace Algorithms_Performance_Visualizer.Components {
             this.maxKey = maxKey;
         }
         public void Sort(SortDataItem[] data) {
-            var d = new CountingSorter<SortDataItem>().Sort(data, this.minKey, this.maxKey);
+            new CountingSorter<SortDataItem>().Sort(data, this.minKey, this.maxKey);
         }
     }
 
