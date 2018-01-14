@@ -61,10 +61,10 @@ namespace Algorithms_Performance_Visualizer.Views {
             }
         }
         async Task Measure(DataItem[] data, int key) {
-            long searchTime = await Controller.Search(data, key);
-            this.seriesSearch.PointList.Add(new ChartPoint(data.Length, searchTime));
-            searchTime = await Controller.BinarySearch(data, key);
-            this.seriesBinarySearch.PointList.Add(new ChartPoint(data.Length, searchTime));
+            long time = await Controller.Search(data, key);
+            this.seriesSearch.PointList.Add(new ChartPoint(data.Length, time));
+            time = await Controller.BinarySearch(data, key);
+            this.seriesBinarySearch.PointList.Add(new ChartPoint(data.Length, time));
         }
         static DataItem[] CreateData(long dataSetSize) {
             DataItem[] data = new DataItem[dataSetSize];
