@@ -39,12 +39,12 @@ namespace Algorithms_Performance_Visualizer.Views {
         }
         void OnStartButtonFormatControllerState(object sender, ConvertEventArgs e) {
             if(e.DesiredType != typeof(string)) return;
-            SortingViewControllerState state = (SortingViewControllerState)e.Value;
+            ControllerState state = (ControllerState)e.Value;
             switch(state) {
-                case SortingViewControllerState.Wait:
+                case ControllerState.Wait:
                     e.Value = "Start";
                     break;
-                case SortingViewControllerState.Active:
+                case ControllerState.Active:
                     e.Value = "Stop";
                     break;
                 default:
@@ -52,12 +52,12 @@ namespace Algorithms_Performance_Visualizer.Views {
             }
         }
         async void OnStartButtonClick(object sender, EventArgs e) {
-            if(Controller.State == SortingViewControllerState.Wait) {
-                Controller.State = SortingViewControllerState.Active;
+            if(Controller.State == ControllerState.Wait) {
+                Controller.State = ControllerState.Active;
                 await Start();
             }
             else {
-                Controller.State = SortingViewControllerState.Wait;
+                Controller.State = ControllerState.Wait;
             }
         }
         void OnClearChartButtonClick(object sender, EventArgs e) {
@@ -142,10 +142,8 @@ namespace Algorithms_Performance_Visualizer.Views {
         bool allowBucketSort;
         bool allowRadixSort;
         string progress;
-        SortingViewControllerState state;
 
         public SortingViewController() {
-            this.state = SortingViewControllerState.Wait;
             this.allowBubbleSort = this.allowSelectionSort = this.allowInsertionSort = this.allowShellSort = this.allowMergeSort = this.allowHeapSort = this.allowQuickSort = this.allowTreeSort = this.allowCountingSort = this.allowBucketSort = this.allowRadixSort = true;
         }
 
@@ -270,21 +268,5 @@ namespace Algorithms_Performance_Visualizer.Views {
                 OnPropertyChanged("Progress");
             }
         }
-        public SortingViewControllerState State {
-            get { return state; }
-            set {
-                if(State == value)
-                    return;
-                state = value;
-                OnPropertyChanged("State");
-            }
-        }
-        public bool IsActive {
-            get { return State == SortingViewControllerState.Active; }
-        }
-    }
-
-    public enum SortingViewControllerState {
-        Wait, Active
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Chart\Painter.cs" />
     <Compile Include="Chart\ViewInfo.cs" />
     <Compile Include="Components\Sorters.cs" />
+    <Compile Include="Data\DataItem.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -90,8 +91,17 @@
     <Compile Include="Tests\ChartControlTests.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tests\SearchingViewTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Tests\SortingViewTests.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\SearchingView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\SearchingView.Designer.cs">
+      <DependentUpon>SearchingView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SortingView.cs">
       <SubType>UserControl</SubType>
@@ -111,6 +121,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\SearchingView.resx">
+      <DependentUpon>SearchingView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\SortingView.resx">
       <DependentUpon>SortingView.cs</DependentUpon>
     </EmbeddedResource>

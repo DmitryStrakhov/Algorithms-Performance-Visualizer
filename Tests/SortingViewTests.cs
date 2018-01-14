@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Algorithms_Performance_Visualizer.Base;
 using Algorithms_Performance_Visualizer.Services;
 using Algorithms_Performance_Visualizer.Views;
-using Data_Structures_and_Algorithms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Algorithms_Performance_Visualizer.Tests {
@@ -141,7 +141,7 @@ namespace Algorithms_Performance_Visualizer.Tests {
             Assert.IsTrue(Controller.AllowBubbleSort);
             Assert.IsTrue(Controller.AllowRadixSort);
             Assert.IsTrue(string.IsNullOrEmpty(Controller.Progress));
-            Assert.AreEqual(SortingViewControllerState.Wait, Controller.State);
+            Assert.AreEqual(ControllerState.Wait, Controller.State);
         }
         [TestMethod]
         public void ControllerToViewBindingsTest() {
@@ -199,11 +199,11 @@ namespace Algorithms_Performance_Visualizer.Tests {
         }
         [TestMethod]
         public void ViewStartStopButtonTextTest() {
-            Controller.State = SortingViewControllerState.Wait;
+            Controller.State = ControllerState.Wait;
             Assert.AreEqual("Start", View.StartButton.Text);
-            Controller.State = SortingViewControllerState.Active;
+            Controller.State = ControllerState.Active;
             Assert.AreEqual("Stop", View.StartButton.Text);
-            Controller.State = SortingViewControllerState.Wait;
+            Controller.State = ControllerState.Wait;
             Assert.AreEqual("Start", View.StartButton.Text);
         }
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
