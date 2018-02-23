@@ -28,15 +28,19 @@
             this.sortingView1 = new Algorithms_Performance_Visualizer.Views.SortingView();
             this.tabSearching = new System.Windows.Forms.TabPage();
             this.searchingView = new Algorithms_Performance_Visualizer.Views.SearchingView();
+            this.tabSelection = new System.Windows.Forms.TabPage();
+            this.selectionView1 = new Algorithms_Performance_Visualizer.Views.SelectionView();
             this.tabControl.SuspendLayout();
             this.tabSorting.SuspendLayout();
             this.tabSearching.SuspendLayout();
+            this.tabSelection.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabSorting);
             this.tabControl.Controls.Add(this.tabSearching);
+            this.tabControl.Controls.Add(this.tabSelection);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -82,6 +86,25 @@
             this.searchingView.Size = new System.Drawing.Size(1196, 575);
             this.searchingView.TabIndex = 0;
             // 
+            // tabSelection
+            // 
+            this.tabSelection.Controls.Add(this.selectionView1);
+            this.tabSelection.Location = new System.Drawing.Point(4, 22);
+            this.tabSelection.Name = "tabSelection";
+            this.tabSelection.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSelection.Size = new System.Drawing.Size(1202, 581);
+            this.tabSelection.TabIndex = 2;
+            this.tabSelection.Text = "Selection";
+            this.tabSelection.UseVisualStyleBackColor = true;
+            // 
+            // selectionView1
+            // 
+            this.selectionView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectionView1.Location = new System.Drawing.Point(3, 3);
+            this.selectionView1.Name = "selectionView1";
+            this.selectionView1.Size = new System.Drawing.Size(1196, 575);
+            this.selectionView1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -94,6 +117,7 @@
             this.tabControl.ResumeLayout(false);
             this.tabSorting.ResumeLayout(false);
             this.tabSearching.ResumeLayout(false);
+            this.tabSelection.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -105,6 +129,8 @@
         private Views.SortingView sortingView1;
         private System.Windows.Forms.TabPage tabSearching;
         private Views.SearchingView searchingView;
+        private System.Windows.Forms.TabPage tabSelection;
+        private Views.SelectionView selectionView1;
     }
 }
 

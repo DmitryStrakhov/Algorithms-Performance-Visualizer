@@ -94,6 +94,9 @@
     <Compile Include="Tests\SearchingViewTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Tests\SelectionViewTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Tests\SortingViewTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,6 +105,12 @@
     </Compile>
     <Compile Include="Views\SearchingView.Designer.cs">
       <DependentUpon>SearchingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\SelectionView.Designer.cs">
+      <DependentUpon>SelectionView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SortingView.cs">
       <SubType>UserControl</SubType>
@@ -123,6 +132,9 @@
     </Compile>
     <EmbeddedResource Include="Views\SearchingView.resx">
       <DependentUpon>SearchingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SelectionView.resx">
+      <DependentUpon>SelectionView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SortingView.resx">
       <DependentUpon>SortingView.cs</DependentUpon>

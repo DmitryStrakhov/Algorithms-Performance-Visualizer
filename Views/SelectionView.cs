@@ -11,21 +11,22 @@ using Algorithms_Performance_Visualizer.Base;
 using Algorithms_Performance_Visualizer.Data;
 using Algorithms_Performance_Visualizer.Controls;
 using System.Diagnostics;
+using System.Threading;
 using Data_Structures_and_Algorithms;
 
 namespace Algorithms_Performance_Visualizer.Views {
-    public partial class SearchingView : BaseUserControl {
-        public SearchingView() {
+    public partial class SelectionView : BaseUserControl {
+        public SelectionView() {
             InitializeComponent();
-        }
-        protected override BaseController CreateController() {
-            return new SearchingViewController();
         }
         protected override void Bind() {
             base.Bind();
             this.progressLabel.Bind("Text", Controller, "Progress");
             this.btnStart.Bind("Text", Controller, "State", formatDelegate: OnStartButtonFormatControllerState);
         }
+
+        #region Parse & Format
+
         void OnStartButtonFormatControllerState(object sender, ConvertEventArgs e) {
             if(e.DesiredType != typeof(string)) return;
             ControllerState state = (ControllerState)e.Value;
@@ -40,6 +41,11 @@ namespace Algorithms_Performance_Visualizer.Views {
                     throw new ArgumentException();
             }
         }
+        
+        #endregion
+
+        #region Handlers
+
         async void OnStartButtonClick(object sender, EventArgs e) {
             if(Controller.State == ControllerState.Wait) {
                 Controller.State = ControllerState.Active;
@@ -52,54 +58,66 @@ namespace Algorithms_Performance_Visualizer.Views {
         void OnClearChartButtonClick(object sender, EventArgs e) {
             this.chartControl.Series.ForEach(x => x.PointList.Clear());
         }
+
+        #endregion
+
+        static readonly Random rg = new Random();
+
         async Task Start() {
-            Random rg = new Random();
-            for(long arraySize = 10; Controller.IsActive; arraySize += 1000) {
-                DataItem[] data = CreateData(arraySize);
-                int key = data[rg.Next(0, data.Length)].Key;
-                await Measure(data, key);
+            for(long arraySize = 10; Controller.IsActive; arraySize += 100) {
+                DataItem[] dataSet1 = CreateData(arraySize);
+                DataItem[] dataSet2 = dataSet1.DoClone();
+                int key = rg.Next(0, dataSet1.Length);
+                await Measure(dataSet1, dataSet2, key);
             }
         }
-        async Task Measure(DataItem[] data, int key) {
-            long time = await Controller.Search(data, key);
-            this.seriesSearch.PointList.Add(new ChartPoint(data.Length, time));
-            time = await Controller.BinarySearch(data, key);
-            this.seriesBinarySearch.PointList.Add(new ChartPoint(data.Length, time));
+        async Task Measure(DataItem[] dataSet1, DataItem[] dataSet2, int key) {
+            long time = await Controller.QuickSelect(dataSet1, key);
+            this.seriesQuickSelect.PointList.Add(new ChartPoint(dataSet1.Length, time));
+            time = await Controller.QuickSort(dataSet2, key);
+            this.seriesQuickSort.PointList.Add(new ChartPoint(dataSet2.Length, time));
         }
+
         static DataItem[] CreateData(long dataSetSize) {
             DataItem[] data = new DataItem[dataSetSize];
             for(int n = 0; n < dataSetSize; n++) {
-                data[n] = new DataItem(n);
+                data[n] = new DataItem(rg.Next(1000));
             }
             return data;
         }
-        protected internal new SearchingViewController Controller { get { return (SearchingViewController)base.Controller; } }
+
+        protected override BaseController CreateController() {
+            return new SelectionViewController();
+        }
+        internal new SelectionViewController Controller { get { return (SelectionViewController)base.Controller; } }
     }
 
-    public class SearchingViewController : BaseController {
-        public SearchingViewController() {
+    public class SelectionViewController : BaseController {
+        public SelectionViewController() {
         }
-        public Task<long> Search(DataItem[] data, int key) {
-            return DoSearch(data, key, SearchCore);
+        public Task<long> QuickSelect(DataItem[] data, int key) {
+            return DoSelect(data, key, QuickSelectCore);
         }
-        public Task<long> BinarySearch(DataItem[] data, int key) {
-            return DoSearch(data, key, BinarySearchCore);
+        public Task<long> QuickSort(DataItem[] data, int key) {
+            return DoSelect(data, key, QuickSortCore);
         }
-        Task<long> DoSearch(DataItem[] data, int key, Action<DataItem[], int> searchAction) {
+        Task<long> DoSelect(DataItem[] data, int key, Func<DataItem[], int, DataItem> selectAction) {
             Progress = $"DataSet Size: {data.Length}";
             return Task.Run(() => {
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
-                searchAction(data, key);
+                selectAction(data, key);
                 stopWatch.Stop();
                 return stopWatch.ElapsedMilliseconds;
             });
         }
-        static void SearchCore(DataItem[] data, int key) {
-            data.Search(x => x.Key == key);
+        static DataItem QuickSelectCore(DataItem[] data, int key) {
+            return Selection.Select(data, key);
         }
-        static void BinarySearchCore(DataItem[] data, int key) {
-            data.BinarySearch(x => key.CompareTo(x.Key));
+        static DataItem QuickSortCore(DataItem[] data, int key) {
+            quickSorter.Sort(data);
+            return data[key];
         }
+        static readonly ISort quickSorter = new QuickSorter();
     }
 }

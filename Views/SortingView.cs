@@ -141,8 +141,7 @@ namespace Algorithms_Performance_Visualizer.Views {
         bool allowCountingSort;
         bool allowBucketSort;
         bool allowRadixSort;
-        string progress;
-
+        
         public SortingViewController() {
             this.allowBubbleSort = this.allowSelectionSort = this.allowInsertionSort = this.allowShellSort = this.allowMergeSort = this.allowHeapSort = this.allowQuickSort = this.allowTreeSort = this.allowCountingSort = this.allowBucketSort = this.allowRadixSort = true;
         }
@@ -257,15 +256,6 @@ namespace Algorithms_Performance_Visualizer.Views {
                     return;
                 allowRadixSort = value;
                 OnPropertyChanged("AllowRadixSort");
-            }
-        }
-        public string Progress {
-            get { return progress; }
-            set {
-                if(Progress == value)
-                    return;
-                progress = value;
-                OnPropertyChanged("Progress");
             }
         }
     }

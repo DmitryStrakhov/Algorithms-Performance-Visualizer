@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 namespace Algorithms_Performance_Visualizer.Base {
     public class BaseController : INotifyPropertyChanged {
         ControllerState state;
+        string progress;
 
         public BaseController() {
+            this.progress = string.Empty;
             this.state = ControllerState.Wait;
         }
         public ControllerState State {
@@ -19,6 +21,15 @@ namespace Algorithms_Performance_Visualizer.Base {
                     return;
                 state = value;
                 OnPropertyChanged("State");
+            }
+        }
+        public string Progress {
+            get { return progress; }
+            set {
+                if(Progress == value)
+                    return;
+                progress = value;
+                OnPropertyChanged("Progress");
             }
         }
         public bool IsActive {

@@ -117,6 +117,9 @@ namespace Algorithms_Performance_Visualizer {
                 action(item);
             }
         }
+        public static T[] DoClone<T>(this T[] @this) {
+            return (T[])@this.Clone();
+        }
     }
 
     public class MathUtils {
