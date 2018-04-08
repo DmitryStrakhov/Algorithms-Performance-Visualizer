@@ -33,5 +33,6 @@ namespace Algorithms_Performance_Visualizer.Base {
         }
         protected virtual void Bind() {
         }
+        protected static readonly Random Random = new Random();
     }
 }

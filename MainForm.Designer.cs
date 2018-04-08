@@ -30,10 +30,13 @@
             this.searchingView = new Algorithms_Performance_Visualizer.Views.SearchingView();
             this.tabSelection = new System.Windows.Forms.TabPage();
             this.selectionView1 = new Algorithms_Performance_Visualizer.Views.SelectionView();
+            this.tabHashMap = new System.Windows.Forms.TabPage();
+            this.hashMapView1 = new Algorithms_Performance_Visualizer.Views.HashMapView();
             this.tabControl.SuspendLayout();
             this.tabSorting.SuspendLayout();
             this.tabSearching.SuspendLayout();
             this.tabSelection.SuspendLayout();
+            this.tabHashMap.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -41,6 +44,7 @@
             this.tabControl.Controls.Add(this.tabSorting);
             this.tabControl.Controls.Add(this.tabSearching);
             this.tabControl.Controls.Add(this.tabSelection);
+            this.tabControl.Controls.Add(this.tabHashMap);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -105,6 +109,25 @@
             this.selectionView1.Size = new System.Drawing.Size(1196, 575);
             this.selectionView1.TabIndex = 0;
             // 
+            // tabHashMap
+            // 
+            this.tabHashMap.Controls.Add(this.hashMapView1);
+            this.tabHashMap.Location = new System.Drawing.Point(4, 22);
+            this.tabHashMap.Name = "tabHashMap";
+            this.tabHashMap.Padding = new System.Windows.Forms.Padding(3);
+            this.tabHashMap.Size = new System.Drawing.Size(1202, 581);
+            this.tabHashMap.TabIndex = 3;
+            this.tabHashMap.Text = "HashMap";
+            this.tabHashMap.UseVisualStyleBackColor = true;
+            // 
+            // hashMapView1
+            // 
+            this.hashMapView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hashMapView1.Location = new System.Drawing.Point(3, 3);
+            this.hashMapView1.Name = "hashMapView1";
+            this.hashMapView1.Size = new System.Drawing.Size(1196, 575);
+            this.hashMapView1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,6 +141,7 @@
             this.tabSorting.ResumeLayout(false);
             this.tabSearching.ResumeLayout(false);
             this.tabSelection.ResumeLayout(false);
+            this.tabHashMap.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -131,6 +155,8 @@
         private Views.SearchingView searchingView;
         private System.Windows.Forms.TabPage tabSelection;
         private Views.SelectionView selectionView1;
+        private System.Windows.Forms.TabPage tabHashMap;
+        private Views.HashMapView hashMapView1;
     }
 }
 

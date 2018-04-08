@@ -53,10 +53,9 @@ namespace Algorithms_Performance_Visualizer.Views {
             this.chartControl.Series.ForEach(x => x.PointList.Clear());
         }
         async Task Start() {
-            Random rg = new Random();
             for(long arraySize = 10; Controller.IsActive; arraySize += 1000) {
                 DataItem[] data = CreateData(arraySize);
-                int key = data[rg.Next(0, data.Length)].Key;
+                int key = data[Random.Next(0, data.Length)].Key;
                 await Measure(data, key);
             }
         }

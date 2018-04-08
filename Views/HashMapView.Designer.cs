@@ -1,5 +1,5 @@
 ﻿namespace Algorithms_Performance_Visualizer.Views {
-    partial class SelectionView {
+    partial class HashMapView {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -24,10 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             this.chartControl = new Algorithms_Performance_Visualizer.Controls.ChartControl();
-            this.seriesQuickSelect = new Algorithms_Performance_Visualizer.Controls.ChartSeries();
-            this.seriesQuickSort = new Algorithms_Performance_Visualizer.Controls.ChartSeries();
+            this.seriesHashMap = new Algorithms_Performance_Visualizer.Controls.ChartSeries();
+            this.seriesHashtable = new Algorithms_Performance_Visualizer.Controls.ChartSeries();
+            this.seriesDictionary = new Algorithms_Performance_Visualizer.Controls.ChartSeries();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.commandPanel = new System.Windows.Forms.Panel();
+            this.rbContainsKey = new System.Windows.Forms.RadioButton();
+            this.rbAdd = new System.Windows.Forms.RadioButton();
             this.btnStart = new System.Windows.Forms.Button();
             this.progressLabel = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
@@ -47,21 +50,27 @@
             this.chartControl.Location = new System.Drawing.Point(0, 0);
             this.chartControl.Name = "chartControl";
             this.chartControl.PointSize = new System.Drawing.Size(5, 5);
-            this.chartControl.Series.Add(this.seriesQuickSelect);
-            this.chartControl.Series.Add(this.seriesQuickSort);
+            this.chartControl.Series.Add(this.seriesHashMap);
+            this.chartControl.Series.Add(this.seriesHashtable);
+            this.chartControl.Series.Add(this.seriesDictionary);
             this.chartControl.Size = new System.Drawing.Size(1039, 493);
             this.chartControl.TabIndex = 0;
             this.chartControl.Text = "chartControl";
             // 
-            // seriesQuickSelect
+            // seriesHashMap
             // 
-            this.seriesQuickSelect.Color = System.Drawing.Color.Red;
-            this.seriesQuickSelect.Label = "QuickSelect";
+            this.seriesHashMap.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.seriesHashMap.Label = "HashMap";
             // 
-            // seriesQuickSort
+            // seriesHashtable
             // 
-            this.seriesQuickSort.Color = System.Drawing.Color.Black;
-            this.seriesQuickSort.Label = "QuickSort";
+            this.seriesHashtable.Color = System.Drawing.Color.Green;
+            this.seriesHashtable.Label = "Hashtable";
+            // 
+            // seriesDictionary
+            // 
+            this.seriesDictionary.Color = System.Drawing.Color.Blue;
+            this.seriesDictionary.Label = "Dictionary";
             // 
             // splitContainer
             // 
@@ -84,6 +93,8 @@
             // 
             // commandPanel
             // 
+            this.commandPanel.Controls.Add(this.rbContainsKey);
+            this.commandPanel.Controls.Add(this.rbAdd);
             this.commandPanel.Controls.Add(this.btnStart);
             this.commandPanel.Controls.Add(this.progressLabel);
             this.commandPanel.Controls.Add(this.btnClear);
@@ -92,6 +103,26 @@
             this.commandPanel.Name = "commandPanel";
             this.commandPanel.Size = new System.Drawing.Size(1039, 50);
             this.commandPanel.TabIndex = 3;
+            // 
+            // rbContainsKey
+            // 
+            this.rbContainsKey.AutoSize = true;
+            this.rbContainsKey.Location = new System.Drawing.Point(655, 17);
+            this.rbContainsKey.Name = "rbContainsKey";
+            this.rbContainsKey.Size = new System.Drawing.Size(84, 17);
+            this.rbContainsKey.TabIndex = 4;
+            this.rbContainsKey.Text = "ContainsKey";
+            this.rbContainsKey.UseVisualStyleBackColor = true;
+            // 
+            // rbAdd
+            // 
+            this.rbAdd.AutoSize = true;
+            this.rbAdd.Location = new System.Drawing.Point(552, 18);
+            this.rbAdd.Name = "rbAdd";
+            this.rbAdd.Size = new System.Drawing.Size(44, 17);
+            this.rbAdd.TabIndex = 3;
+            this.rbAdd.Text = "Add";
+            this.rbAdd.UseVisualStyleBackColor = true;
             // 
             // btnStart
             // 
@@ -125,12 +156,12 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.OnClearChartButtonClick);
             // 
-            // SelectionView
+            // HashMapView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer);
-            this.Name = "SelectionView";
+            this.Name = "HashMapView";
             this.Size = new System.Drawing.Size(1041, 551);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
@@ -150,7 +181,10 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label progressLabel;
         private System.Windows.Forms.Button btnClear;
-        private Controls.ChartSeries seriesQuickSelect;
-        private Controls.ChartSeries seriesQuickSort;
+        private System.Windows.Forms.RadioButton rbContainsKey;
+        private System.Windows.Forms.RadioButton rbAdd;
+        private Controls.ChartSeries seriesHashMap;
+        private Controls.ChartSeries seriesHashtable;
+        private Controls.ChartSeries seriesDictionary;
     }
 }

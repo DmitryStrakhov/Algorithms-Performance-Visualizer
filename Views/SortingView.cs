@@ -119,9 +119,8 @@ namespace Algorithms_Performance_Visualizer.Views {
 
         SortDataItem[] CreateData(long dataSetSize) {
             SortDataItem[] data = new SortDataItem[dataSetSize];
-            Random rg = new Random();
             for(int n = 0; n < data.Length; n++) {
-                data[n] = new SortDataItem(rg.Next(0, 10000));
+                data[n] = new SortDataItem(Random.Next(0, 10000));
             }
             return data;
         }

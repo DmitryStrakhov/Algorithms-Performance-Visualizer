@@ -61,13 +61,11 @@ namespace Algorithms_Performance_Visualizer.Views {
 
         #endregion
 
-        static readonly Random rg = new Random();
-
         async Task Start() {
             for(long arraySize = 10; Controller.IsActive; arraySize += 100) {
                 DataItem[] dataSet1 = CreateData(arraySize);
                 DataItem[] dataSet2 = dataSet1.DoClone();
-                int key = rg.Next(0, dataSet1.Length);
+                int key = Random.Next(0, dataSet1.Length);
                 await Measure(dataSet1, dataSet2, key);
             }
         }
@@ -81,7 +79,7 @@ namespace Algorithms_Performance_Visualizer.Views {
         static DataItem[] CreateData(long dataSetSize) {
             DataItem[] data = new DataItem[dataSetSize];
             for(int n = 0; n < dataSetSize; n++) {
-                data[n] = new DataItem(rg.Next(1000));
+                data[n] = new DataItem(Random.Next(1000));
             }
             return data;
         }

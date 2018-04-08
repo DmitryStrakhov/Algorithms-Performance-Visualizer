@@ -71,7 +71,9 @@
     <Compile Include="Chart\Painter.cs" />
     <Compile Include="Chart\ViewInfo.cs" />
     <Compile Include="Components\Sorters.cs" />
+    <Compile Include="Data\HashMapData.cs" />
     <Compile Include="Data\DataItem.cs" />
+    <Compile Include="Data\Pair.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -91,6 +93,9 @@
     <Compile Include="Tests\ChartControlTests.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tests\HashMapViewTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Tests\SearchingViewTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -99,6 +104,12 @@
     </Compile>
     <Compile Include="Tests\SortingViewTests.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\HashMapView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\HashMapView.Designer.cs">
+      <DependentUpon>HashMapView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchingView.cs">
       <SubType>UserControl</SubType>
@@ -130,6 +141,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\HashMapView.resx">
+      <DependentUpon>HashMapView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\SearchingView.resx">
       <DependentUpon>SearchingView.cs</DependentUpon>
     </EmbeddedResource>
