@@ -70,7 +70,8 @@ namespace Algorithms_Performance_Visualizer {
     }
 
     public static class ControlExtensions {
-        public static void Bind<T>(this Control control, string propertyName, T dataSource, string dataMember, DataSourceUpdateMode updateMode = DataSourceUpdateMode.OnPropertyChanged, ConvertEventHandler parseDelegate = null, ConvertEventHandler formatDelegate = null) {
+        public static void Bind<T>(this Control control, string propertyName, T dataSource, string dataMember, DataSourceUpdateMode updateMode = DataSourceUpdateMode.OnPropertyChanged, ConvertEventHandler parseDelegate = null, ConvertEventHandler formatDelegate = null, bool clearBindings = false, bool readValue = false, bool writeValue = false) {
+            if(clearBindings) control.ClearBindings();
             Binding binding = control.DataBindings.Add(propertyName, dataSource, dataMember, true, updateMode);
             if(parseDelegate != null) {
                 binding.Parse += parseDelegate;
@@ -78,6 +79,18 @@ namespace Algorithms_Performance_Visualizer {
             if(formatDelegate != null) {
                 binding.Format += formatDelegate;
             }
+            if(readValue) binding.ReadValue();
+            if(writeValue) binding.WriteValue();
+        }
+        public static void ClearBindings(this Control control) {
+            if(control.DataBindings.Count != 0) control.DataBindings.Clear();
+        }
+        public static T SingleChild<T>(this Control control) where T : Control {
+            Control.ControlCollection controls = control.Controls;
+            if(controls.Count != 1) {
+                throw new InvalidOperationException();
+            }
+            return (T)controls[0];
         }
         public static T GetControl<T>(this Control view, string instanceName) where T : Control {
             FieldInfo fieldInfo = GetFieldCore(view.GetType(), instanceName);
@@ -121,6 +134,11 @@ namespace Algorithms_Performance_Visualizer {
             return (T[])@this.Clone();
         }
     }
+
+    public static class ObjectExtensions {
+        public static T CastTo<T>(this object @this) => (T)@this;
+    }
+
 
     public class MathUtils {
         public static int Round(double value) {

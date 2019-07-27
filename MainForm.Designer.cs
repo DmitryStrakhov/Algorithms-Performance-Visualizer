@@ -32,11 +32,14 @@
             this.selectionView1 = new Algorithms_Performance_Visualizer.Views.SelectionView();
             this.tabHashMap = new System.Windows.Forms.TabPage();
             this.hashMapView1 = new Algorithms_Performance_Visualizer.Views.HashMapView();
+            this.tabStringMatching = new System.Windows.Forms.TabPage();
+            this.stringMatchingView = new Algorithms_Performance_Visualizer.Views.StringMatchingView();
             this.tabControl.SuspendLayout();
             this.tabSorting.SuspendLayout();
             this.tabSearching.SuspendLayout();
             this.tabSelection.SuspendLayout();
             this.tabHashMap.SuspendLayout();
+            this.tabStringMatching.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -45,6 +48,7 @@
             this.tabControl.Controls.Add(this.tabSearching);
             this.tabControl.Controls.Add(this.tabSelection);
             this.tabControl.Controls.Add(this.tabHashMap);
+            this.tabControl.Controls.Add(this.tabStringMatching);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -128,6 +132,25 @@
             this.hashMapView1.Size = new System.Drawing.Size(1196, 575);
             this.hashMapView1.TabIndex = 0;
             // 
+            // tabStringMatching
+            // 
+            this.tabStringMatching.Controls.Add(this.stringMatchingView);
+            this.tabStringMatching.Location = new System.Drawing.Point(4, 22);
+            this.tabStringMatching.Name = "tabStringMatching";
+            this.tabStringMatching.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStringMatching.Size = new System.Drawing.Size(1202, 581);
+            this.tabStringMatching.TabIndex = 4;
+            this.tabStringMatching.Text = "String Matching";
+            this.tabStringMatching.UseVisualStyleBackColor = true;
+            // 
+            // stringMatchingView
+            // 
+            this.stringMatchingView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.stringMatchingView.Location = new System.Drawing.Point(3, 3);
+            this.stringMatchingView.Name = "stringMatchingView";
+            this.stringMatchingView.Size = new System.Drawing.Size(1196, 575);
+            this.stringMatchingView.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,6 +165,7 @@
             this.tabSearching.ResumeLayout(false);
             this.tabSelection.ResumeLayout(false);
             this.tabHashMap.ResumeLayout(false);
+            this.tabStringMatching.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -157,6 +181,8 @@
         private Views.SelectionView selectionView1;
         private System.Windows.Forms.TabPage tabHashMap;
         private Views.HashMapView hashMapView1;
+        private System.Windows.Forms.TabPage tabStringMatching;
+        private Views.StringMatchingView stringMatchingView;
     }
 }
 

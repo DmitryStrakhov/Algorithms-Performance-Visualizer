@@ -71,6 +71,7 @@
     <Compile Include="Chart\Painter.cs" />
     <Compile Include="Chart\ViewInfo.cs" />
     <Compile Include="Components\Sorters.cs" />
+    <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\HashMapData.cs" />
     <Compile Include="Data\DataItem.cs" />
     <Compile Include="Data\Pair.cs" />
@@ -105,6 +106,9 @@
     <Compile Include="Tests\SortingViewTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Tests\StringMatchingViewTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\HashMapView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +133,49 @@
     <Compile Include="Views\SortingView.Designer.cs">
       <DependentUpon>SortingView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\BaseView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\BaseView.Designer.cs">
+      <DependentUpon>BaseView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\SmPreprocessingView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\SmPreprocessingView.Designer.cs">
+      <DependentUpon>SmPreprocessingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\SmSearchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\SmSearchView.Designer.cs">
+      <DependentUpon>SmSearchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\SmSummaryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\SmSummaryView.Designer.cs">
+      <DependentUpon>SmSummaryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Views\StringMatchingBenchmarks\TreeBuildingView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\TreeBuildingView.Designer.cs">
+      <DependentUpon>TreeBuildingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\TreeSearchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StringMatchingBenchmarks\TreeSearchView.Designer.cs">
+      <DependentUpon>TreeSearchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StringMatchingView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StringMatchingView.Designer.cs">
+      <DependentUpon>StringMatchingView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,6 +199,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SortingView.resx">
       <DependentUpon>SortingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StringMatchingBenchmarks\BaseView.resx">
+      <DependentUpon>BaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StringMatchingBenchmarks\SmPreprocessingView.resx">
+      <DependentUpon>SmPreprocessingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StringMatchingBenchmarks\SmSearchView.resx">
+      <DependentUpon>SmSearchView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StringMatchingBenchmarks\SmSummaryView.resx">
+      <DependentUpon>SmSummaryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StringMatchingBenchmarks\TreeBuildingView.resx">
+      <DependentUpon>TreeBuildingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StringMatchingBenchmarks\TreeSearchView.resx">
+      <DependentUpon>TreeSearchView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StringMatchingView.resx">
+      <DependentUpon>StringMatchingView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

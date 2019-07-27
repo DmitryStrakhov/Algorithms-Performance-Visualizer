@@ -24,12 +24,15 @@ namespace Algorithms_Performance_Visualizer.Base {
             this.graphics = graphics;
         }
         internal void ReleaseGraphics() {
-            this.graphics = null;
+            graphics = null;
         }
         protected Size CalcTextSize(string text) {
-            Debug.Assert(this.graphics != null);
-            SizeF size = this.graphics.MeasureString(text, Control.Font, 0);
+            Debug.Assert(graphics != null);
+            SizeF size = graphics.MeasureString(text, Control.Font, 0);
             return new Size((int)size.Width + 1, (int)size.Height + 1);
+        }
+        public bool DrawBorder {
+            get { return control.DrawBorder; }
         }
         public Rectangle Bounds { get { return new Rectangle(Point.Empty, Control.Size); } }
         public BaseControl Control { get { return control; } }

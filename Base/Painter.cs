@@ -9,7 +9,7 @@ namespace Algorithms_Performance_Visualizer.Base {
     public abstract class BasePainter {
         public void Paint(DrawArgs drawArgs) {
             DrawContent(drawArgs);
-            DrawBorder(drawArgs);
+            if(drawArgs.ViewInfo.DrawBorder) DrawBorder(drawArgs);
         }
 
         protected abstract void DrawContent(DrawArgs drawArgs);

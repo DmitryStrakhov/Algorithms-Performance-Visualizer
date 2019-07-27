@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,26 @@ using System.Windows.Forms;
 
 namespace Algorithms_Performance_Visualizer.Base {
     public abstract class BaseControl : Control {
+        bool drawBorder;
         readonly BasePainter painter;
         readonly BaseViewInfo viewInfo;
 
         public BaseControl() {
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
+            this.drawBorder = true;
             this.painter = CreatePainter();
             this.viewInfo = CreateViewInfo();
         }
-
+        [DefaultValue(true), Category("Appearance")]
+        public bool DrawBorder {
+            get { return drawBorder; }
+            set {
+                if(DrawBorder == value)
+                    return;
+                drawBorder = value;
+                LayoutChanged();
+            }
+        }
         protected sealed override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             PaintCache cache = new PaintCache(e.Graphics);
